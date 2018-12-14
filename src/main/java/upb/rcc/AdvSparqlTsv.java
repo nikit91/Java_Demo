@@ -22,7 +22,7 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 
-public class AdvSparql extends DummySparql {
+public class AdvSparqlTsv extends DummySparql {
 	
 	public static final int UNION_SIZE = 50;
 
