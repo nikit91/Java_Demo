@@ -36,7 +36,8 @@ public class AdvSparqlTsv extends DummySparql {
 
 	public static final String BROADER_PARAM_STR = " { ?c skos:broader <%s> . } ";
 	public static final String SUBJ_PARAM_STR = " { ?m dct:subject <%s> . } ";
-
+	public static final String CATEG_FILTER_STR = " FILTER(?c=<%s>) . ";
+	
 	static {
 		WHERE_PRT.append(" WHERE { ");
 		UNION_PRT.append(" UNION ");
@@ -176,7 +177,7 @@ public class AdvSparqlTsv extends DummySparql {
 		List<QuerySolution> querySolutionList = new ArrayList<>();
 		Query query = QueryFactory.create(queryStr.toString(), Syntax.syntaxARQ);
 		// Remote execution.
-		try (QueryExecution qexec = QueryExecutionFactory.sparqlService("http://131.234.29.111:8890/sparql", query)) {
+		try (QueryExecution qexec = QueryExecutionFactory.sparqlService("http://dbpedia.org/sparql", query)) {
 			// Set the DBpedia specific timeout.
 			((QueryEngineHTTP) qexec).addParam("timeout", "10000");
 			// Execute.
@@ -189,7 +190,7 @@ public class AdvSparqlTsv extends DummySparql {
 			e.printStackTrace();
 		}
 		// sleep
-		//(sleep(1000);
+		sleep(1000);
 		return querySolutionList;
 	}
 

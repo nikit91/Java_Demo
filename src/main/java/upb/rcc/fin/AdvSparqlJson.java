@@ -16,11 +16,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import upb.rcc.AdvSparqlTsv;
 import upb.rcc.Methodology;
 
-public class AdvSparqlTsv_New extends AdvSparqlTsv {
-
+public class AdvSparqlJson extends AdvSparqlTsv {
+	
+	
+	
 
 	public static void main(String[] args) {
-
+		
 		File inputFile = new File(args[0]);
 		File outputFile = new File(args[1]);
 		try {
@@ -43,18 +45,13 @@ public class AdvSparqlTsv_New extends AdvSparqlTsv {
 		Map<String, List<Methodology>> resMap = new HashMap<String, List<Methodology>>();
 		while (linkedList.size() > 0) {
 			System.out.println("Current Queue size: "+linkedList.size());
-			List<String> categoryList = new ArrayList<>();
-			for (int i = 0; i < UNION_SIZE; i++) {
-				categoryList.add(linkedList.poll());
-				if (linkedList.size() == 0) {
-					break;
-				}
-			}
-			System.out.println("Current Category List Size: "+categoryList.size());
+			String category = linkedList.poll();
+			System.out.println("Current Category: "+category);
 			// generate query to fetch methods
-			String methodQuery = genMethodsQuery(categoryList);
+			String methodQuery = genMethodsQuery(category);
 			fetchAllMethods(executeSparql(methodQuery), resMap);
-			System.out.println("Current Map Category Size: "+resMap.size());
+			List<Methodology> methodList = resMap.get(category);
+			System.out.println("Current Category's resources size: "+(methodList==null?0:methodList.size()));
 		}
 		
 		System.out.println("Final ResMap Category Size: "+resMap.size());
@@ -62,6 +59,22 @@ public class AdvSparqlTsv_New extends AdvSparqlTsv {
 		// get json node of map
 		JsonNode jsonNode = generateJsonNode(resMap);
 		writeJsonToFile(jsonNode, outputFile);
+	}
+	
+	public static String genMethodsQuery(String category) {
+
+		StringBuilder methodsQuery = new StringBuilder();
+
+		methodsQuery.append(QUERY_PREFIX);
+		methodsQuery.append(METHOD_QUERY_PRT1);
+		methodsQuery.append(WHERE_PRT);
+		methodsQuery.append(String.format(SUBJ_PARAM_STR, category));
+		methodsQuery.append(METHOD_QUERY_PRT2);
+		methodsQuery.append(String.format(CATEG_FILTER_STR, category));
+		methodsQuery.append(END_PRT);
+
+		return methodsQuery.toString();
+
 	}
 
 }

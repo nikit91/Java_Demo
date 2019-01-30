@@ -8,6 +8,7 @@ public class Methodology {
 
 	public Methodology(int id, String uri, String label, String abs) {
 		super();
+		this.id = id;
 		this.uri = uri;
 		this.label = label;
 		this.abs = abs;
