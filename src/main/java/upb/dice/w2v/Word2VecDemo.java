@@ -49,7 +49,7 @@ public class Word2VecDemo {
 	}
 
 	public static void main(String[] args) {
-		Word2Vec vec = getW2VModel(args[0],false);
+		Word2Vec vec = getW2VModel(args[0],true);
 		INDArray[] testData = getTestData(TEST_CENTROIDS);
 		List<String> resList = new ArrayList<String>();
 		resList.addAll(vec.wordsNearest("dummy", 1));
