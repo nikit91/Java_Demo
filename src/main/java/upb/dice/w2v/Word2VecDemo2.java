@@ -10,7 +10,7 @@ import org.deeplearning4j.models.word2vec.Word2Vec;
 public class Word2VecDemo2 {
 
 	public static void main(String[] args) {
-		File gModel = new File("/Users/nikitsrivastava/nikit_ws/eclipse_ws/Jword2vec/data/GoogleNews-vectors-negative300.bin");
+		File gModel = new File(args[0]);
 	    Word2Vec vec = WordVectorSerializer.readWord2VecModel(gModel);
 	    
 	    String[] wordList = {"cat", "dog", "airplane", "road"};
