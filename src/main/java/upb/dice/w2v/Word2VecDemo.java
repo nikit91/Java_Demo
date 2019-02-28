@@ -18,7 +18,8 @@ public class Word2VecDemo {
 	public static final String BASIC_UTIL = "basic";
 	public static final String TREE_UTIL = "tree";
 	public static final String FLAT_UTIL = "flat";
-	public static final String[] UTIL_TYPES = {BASIC_UTIL, TREE_UTIL, FLAT_UTIL};
+	// public static final String[] UTIL_TYPES = {BASIC_UTIL, TREE_UTIL, FLAT_UTIL};
+	public static final String[] UTIL_TYPES = {TREE_UTIL};
 
 	public static final float[][] TEST_CENTROIDS = { TestConst.CENT1, TestConst.CENT2, TestConst.CENT3, TestConst.CENT4,
 			TestConst.CENT5, TestConst.CENT6, TestConst.CENT7, TestConst.CENT8, TestConst.CENT9, TestConst.CENT10,
